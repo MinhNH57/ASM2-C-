@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ASM2.Models.HocVien>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HoTen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tuoi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.chuyennghanh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaKhoa)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoTen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tuoi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.chuyennghanh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaKhoa)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+                <form method="post" asp-action="Delete" asp-controller="HocVien" asp-route-id ="@item.ID" style="display:inline;">
+                      <button class ="btn btn-outline-dark" type="submit" onclick="return confirm('Are you sure you want to delete this item?');">Delete</button>
+                </form>
+
+                    <form asp-action="RollBackData" asp-controller="HocVien" method="post">
+                        <button type="submit">Khôi phục</button>
+                    </form>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
